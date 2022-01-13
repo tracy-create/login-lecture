@@ -3,20 +3,21 @@
 const id = document.querySelector("#id"), // 괄호 안에는 선택자가 들어옴, #은 id값을 가져오는 것을 의미 
   name = document.querySelector("#name"),
   psword = document.querySelector("#psword"),
-  confrimPsword = document.querySelector("#confirm-psword"),
+  confirmPsword = document.querySelector("#confirm-psword"),
   registerBtn = document.querySelector("#button");
 
 registerBtn.addEventListener("click", register);
 
 function register() {
+  if(!id.value) return alert("아이디를 입력해주세요.");
+  if(psword.value !== confirmPsword.value) return alert("비밀번호가 일치하지 않습니다.");
+
   const req = {
     id: id.value,
     name: name.value,
     psword: psword.value,
-    confrimPsword: confrimPsword.value,
   };
 
-  // fetch를 이용해서 서버에 전달
   fetch("/register", {
     method: "POST",
     headers: {
